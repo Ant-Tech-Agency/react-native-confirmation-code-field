@@ -131,7 +131,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   handlerOnTextChange = this.inheritTextInputMethod(
     'onTextChange',
     (text: string) => {
-      const codeValue = this.truncateString(text);
+      const codeValue = this.truncateString(text).toUpperCase();
       const { codeLength, onFulfill } = this.props;
 
       this.setState(
