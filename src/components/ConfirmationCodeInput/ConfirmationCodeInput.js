@@ -26,6 +26,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
     containerProps: {},
     defaultCode: null,
     inputProps: {},
+    autoCapitalize: 'characters',
     inactiveColor: '#ffffff40',
     inputPosition: 'center',
     size: 40,
@@ -130,7 +131,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   handlerOnTextChange = this.inheritTextInputMethod(
     'onTextChange',
     (text: string) => {
-      const codeValue = this.truncateString(text).toUpperCase();
+      const codeValue = this.truncateString(text);
       const { codeLength, onFulfill } = this.props;
 
       this.setState(
@@ -220,7 +221,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
   );
 
   renderInput() {
-    const { autoFocus, inputProps, keyboardType, codeLength } = this.props;
+    const { autoFocus, inputProps, keyboardType, codeLength, autoCapitalize } = this.props;
 
     return (
       <TextInputCustom
@@ -229,6 +230,7 @@ class ConfirmationCodeInput extends PureComponent<Props, State> {
         maxLength={codeLength}
         {...inputProps}
         autoFocus={autoFocus}
+        autoCapitalize={autoCapitalize}
         keyboardType={keyboardType}
         onBlur={this.handlerOnBlur}
         onFocus={this.handlerOnFocus}
@@ -265,6 +267,7 @@ if (process.env.NODE_ENV !== 'production') {
     onFulfill: PropTypes.func.isRequired,
 
     activeColor: PropTypes.string,
+    autoCapitalize: PropTypes.string,
     autoFocus: PropTypes.bool,
     cellBorderWidth: PropTypes.number,
     codeLength: PropTypes.number,
